@@ -1,0 +1,133 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot?e9e8l2');
+	src:url('fonts/icomoon.eot?#iefixe9e8l2') format('embedded-opentype'),
+		url('fonts/icomoon.ttf?e9e8l2') format('truetype'),
+		url('fonts/icomoon.woff?e9e8l2') format('woff'),
+		url('fonts/icomoon.svg?e9e8l2#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-chevron-with-circle-down:before {
+	content: "\e600";
+}
+.icon-chevron-with-circle-left:before {
+	content: "\e601";
+}
+.icon-chevron-with-circle-right:before {
+	content: "\e602";
+}
+.icon-chevron-with-circle-up:before {
+	content: "\e603";
+}
+.icon-controller-jump-to-start:before {
+	content: "\e604";
+}
+.icon-controller-next:before {
+	content: "\e605";
+}
+.icon-dots-three-horizontal:before {
+	content: "\e606";
+}
+.icon-dots-three-vertical:before {
+	content: "\e607";
+}
+.icon-dots-two-horizontal:before {
+	content: "\e608";
+}
+.icon-dots-two-vertical:before {
+	content: "\e609";
+}
+.icon-area-graph:before {
+	content: "\e60a";
+}
+.icon-email:before {
+	content: "\e60b";
+}
+.icon-globe:before {
+	content: "\e60c";
+}
+.icon-home:before {
+	content: "\e60d";
+}
+.icon-link:before {
+	content: "\e60e";
+}
+.icon-location-pin:before {
+	content: "\e60f";
+}
+.icon-location:before {
+	content: "\e610";
+}
+.icon-mail:before {
+	content: "\e611";
+}
+.icon-mobile:before {
+	content: "\e612";
+}
+.icon-news:before {
+	content: "\e613";
+}
+.icon-old-mobile:before {
+	content: "\e614";
+}
+.icon-old-phone:before {
+	content: "\e615";
+}
+.icon-phone:before {
+	content: "\e616";
+}
+.icon-user:before {
+	content: "\e617";
+}
+.icon-facebook-with-circle:before {
+	content: "\e618";
+}
+.icon-facebook:before {
+	content: "\e619";
+}
+.icon-github-with-circle:before {
+	content: "\e620";
+}
+.icon-github:before {
+	content: "\e621";
+}
+.icon-google-with-circle:before {
+	content: "\e61a";
+}
+.icon-google:before {
+	content: "\e61b";
+}
+.icon-linkedin-with-circle:before {
+	content: "\e61c";
+}
+.icon-linkedin:before {
+	content: "\e61d";
+}
+.icon-twitter-with-circle:before {
+	content: "\e61e";
+}
+.icon-twitter:before {
+	content: "\e61f";
+}
+.icon-github2:before {
+	content: "\eab1";
+}
+.icon-stackoverflow:before {
+	content: "\eacf";
+}

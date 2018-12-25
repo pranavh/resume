@@ -1,0 +1,220 @@
+<html>
+
+<head>
+<script type="text/javascript" language="javascript">
+function mdb(g,m1,d,i) {
+p=-(m1*m1+2.)/m1/m1-g*Math.sin(d)*Math.sin(d)
+q=(2.*m1*m1+1.)/Math.pow(m1,4.)+((g+1.)*(g+1.)/4.+(g-1.)/m1/m1)*Math.sin(d)*Math.sin(d)
+r=-Math.cos(d)*Math.cos(d)/Math.pow(m1,4.)
+a=(3.*q-p*p)/3.
+b=(2.*p*p*p-9.*p*q+27.*r)/27.
+test=b*b/4.+a*a*a/27.
+if(test>0.0) {return -1.0}
+else {
+if(test==0.0) {
+x1=Math.sqrt(-a/3.)
+x2=x1
+x3=2.*x1
+if(b>0.0) {
+x1*=-1.
+x2*=-1.
+x3*=-1.}}
+if(test<0.0) {
+phi=Math.acos(Math.sqrt(-27.*b*b/4./a/a/a))
+x1=2.*Math.sqrt(-a/3.)*Math.cos(phi/3.)
+x2=2.*Math.sqrt(-a/3.)*Math.cos(phi/3.+3.14159265359*2./3.)
+x3=2.*Math.sqrt(-a/3.)*Math.cos(phi/3.+3.14159265359*4./3.)
+if(b>0.0) {
+x1*=-1.
+x2*=-1.
+x3*=-1.}}
+s1=x1-p/3.
+s2=x2-p/3.
+s3=x3-p/3.
+if(s1<s2 && s1<s3) {
+t1=s2
+t2=s3}
+else if(s2<s1 && s2<s3) {
+t1=s1
+t2=s3}
+else {
+t1=s1
+t2=s2}
+b1=Math.asin(Math.sqrt(t1))
+b2=Math.asin(Math.sqrt(t2))
+betas=b1
+betaw=b2
+if(b2>b1) {
+betas=b2
+betaw=b1}
+if(i==0) {return betaw}
+if(i==1) {return betas}}
+}
+function mbd(g,m1,b) {
+return Math.atan((m1*m1*Math.sin(2.*b)-2./Math.tan(b))/(2.+m1*m1*(g+Math.cos(2.*b))))} 
+
+function osr(delta, output) {
+//i=form.i.selectedIndex
+i = 0; //Weak shock
+//g=eval(form.g.value)
+g = 1.4;
+//m1=eval(form.m.value)
+m1 = 4.0;
+if(g<=1.0) {
+alert("gamma must be greater than 1")
+return}
+if(m1<=1.0) {
+alert("m1 must be greater than 1")
+return}
+if(i==0 || i==1) {
+//delta=eval(form.a.value)*3.14159265359/180.
+delta = delta *3.14159265359/180.
+if(delta>=3.14159265359/2.) {
+alert("Turning angle too large")
+return}
+if(delta<=0.0) {
+alert("Turning angle must be greater than zero")
+return}
+beta=mdb(g,m1,delta,i)
+output += "\n" + delta * 180./3.14159265359 + "\t";
+if(beta<0.0) {
+output += "Detached \t";
+} else {
+ m1n=m1*Math.sin(beta)
+output += format(""+beta*180./3.14159265359) + "\t"
+
+m2n = m2(g,m1n);
+m2tmp = m2n / Math.sin(beta-delta);
+output += format(""+m2tmp) + "\t"
+//output += format(""+form.m2n.value/Math.sin(beta-delta)) + "\t"
+p2p1 = 1.+2.*g/(g+1.)*(m1n*m1n-1.)
+output += format(""+p2p1) + "\t"
+p02p01=pp0(g,m1n)/pp0(g,m2(g,m1n))*p2p1
+output +=  format(""+p02p01) + "\t"
+
+if(m2tmp > 1.0) {
+	output = nsr(m2tmp, output);
+} else {
+	output += "No normal shock\t";
+}
+
+//output += format(""+rr0(g,m2(g,m1n))/rr0(g,m1n)*p02p01) + "\t"
+//output += format(""+tt0(g,m2(g,m1n))/tt0(g,m1n))  + "\t"
+
+//Delta	Beta	m2	p2/p1 p02/p01
+}
+}
+return output}
+
+function nsr(v, output) {
+  i=0.
+  g=1.4
+  //v=eval(form.v.value)
+  if(g<=1.0) {
+    alert("gamma must be greater than 1")
+    return}
+
+    if(v<=1.0) {
+      alert("M1 must be greater than 1")
+      return}
+    m1=v
+  //form.m1.value=format(""+m1)
+  //form.m2.value=format(""+m2(g,m1))
+  
+  output += format(""+m2(g,m1)) + "\t";
+  
+  p2p1=1.+2.*g/(g+1.)*(m1*m1-1.)
+  output += format(""+p2p1) + "\t";
+  //form.p2p1.value = format(""+p2p1)
+  
+  p02p01=pp0(g,m1)/pp0(g,m2(g,m1))*p2p1
+  output += format(""+p02p01) + "\t";
+  //form.p02p01.value=format(""+p02p01)
+  
+  //form.r2r1.value=format(""+rr0(g,m2(g,m1))/rr0(g,m1)*p02p01)
+  //form.t2t1.value=format(""+tt0(g,m2(g,m1))/tt0(g,m1))
+  
+  // form.p1p02.value=format(""+pp0(g,m1)/p02p01)
+  output += format(""+pp0(g,m1)/p02p01) + "\t";
+	return output
+}
+
+
+
+function m2(g,m1) {
+   return Math.sqrt((1. + .5 * (g - 1.) * m1 * m1) / (g * m1 * m1 - .5 * (g - 1.)))}
+
+   function pp0(g,m) {
+   return Math.pow((1.+(g-1.)/2.*m*m),-g/(g-1.))}
+
+function rr0(g,m) {
+   return Math.pow((1.+(g-1.)/2.*m*m),-1./(g-1.))}
+   
+function format(s) {
+val=eval(s)
+if(Math.abs(val)<1.0e+6 && Math.abs(val)>1.0e-5) {
+if(val>0.0) return " "+s.substring(0,10) //Medium size numbers w/o exponents
+else return s.substring(0,11)}
+ie=s.indexOf("e") //Numbers with exponents
+if(ie>0) {
+mant=s.substring(0,ie)
+if(val>=0.0) mant=" "+mant
+if(mant.length>8) mant=mant.substring(0,8)
+if(Math.abs(val)>1.0) mant=mant+"e+"
+else if(Math.abs(val)<1.0) mant=mant+"e-"}
+else if(Math.abs(val)>=1.0e+6) { //Large numbers without exponents
+if(val>0) mant=" "+s.substring(0,1)+"."+s.substring(1,6)+"e+"
+else mant=s.substring(0,2)+"."+s.substring(1,6)+"e+"}
+else if(val == 0.0) {
+return 0.0;}
+else if(Math.abs(val)<=1.0e-5) { //Small numbers without exponents
+ip=s.indexOf(".")
+t=s.substring(ip+1,s.length)
+ix=1
+while(t.substring(0,1)=="0") {
+t=t.substring(1,t.length)
+ix++}
+if(val>0) mant=" "+t.substring(0,1)+"."+t.substring(1,6)+"e-"
+else mant=s.substring(0,2)+"."+t.substring(1,6)+"e-"}
+xpo=Math.abs(Math.floor(Math.log(Math.abs(val))/Math.log(10.0)))
+xpos=""+xpo
+if(xpo<10) return mant+"00"+xpos
+if(xpo<100) return mant+"0"+xpos
+return mant+xpos
+} 
+</script>
+
+<script type="text/javascript" language="javascript">
+function jsStart(form) {
+	output = "";
+	tax = document.getElementById("ta");
+	tax.innerHTML = "#Delta\tBeta\tm2\tp2/p1\tp02/p01\tM3\tp3/p2\tp03/p02\tp2/p03"
+
+	delta = 0;
+	for(delta = eval(form.start_angle.value); delta <= eval(form.end_angle.value); delta=delta + eval(form.incr.value)) {
+		output = osr(delta, "");
+		tax.innerHTML += output;
+	}
+	tax.innerHTML = "<pre>" + tax.innerHTML + "</pre>";
+}
+</script>
+</head>
+<body>
+Adapted from the Compressible Aerodynamics Calculator at <a href="http://www.dept.aoe.vt.edu/~devenpor/aoe3114/calc.html">http://www.dept.aoe.vt.edu/~devenpor/aoe3114/calc.html</a>
+<form>
+<label for="start_angle">Start angle</label><input name="start_angle" id="start_angle" type="textinput" value="5.1"><br />
+<label for="end_angle">End angle</label><input name="end_angle" id="end_angle" type="textinput" value="38.7"><br />
+<label for="incr">Increment</label><input name="incr" id="incr" type="textinput" value="0.2"><br />
+<input type="button" value="Click" onclick="jsStart(this.form);" /><br />
+</form>
+
+<br />
+<br />
+Output: <br />
+<div id="ta" style="width:100%; height=200px;">
+
+</div>
+
+</body>
+
+</html>

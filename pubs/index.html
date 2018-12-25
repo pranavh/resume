@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title>Redirecting</title>
+    <META http-equiv="refresh" content="5;URL=http://www4.ncsu.edu/~phosang/#jump-pub">
+    <script language="javascript" type="text/javascript">
+	nsec=5;
+        function decrnsec() {
+	    document.getElementById('numsec').innerHTML = (--nsec).toString();
+	}
+    </script>
+  </head>
+  <body onload="setInterval(decrnsec, 1000)">
+    <center>You aren't supposed to be here. Redirecting to the new location automatically in <span id="numsec">5</span> seconds. If that didn't work, click <a href="../#jump-pub">here</a></center>
+  </body>
+</html>
+
